@@ -1,0 +1,11 @@
+Flask
+Flask-Security
+flask-security-too
+flask_sqlalchemy
+pandas
+blinker
+flask_ngrok
+flask_wtf==0.15.1
+mysqlclient
+email_validator
+python-dotenv
