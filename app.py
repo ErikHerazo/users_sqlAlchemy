@@ -49,27 +49,27 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField('Log in')
 
-    @app.route('/')
-    @login_required
-    def home():
-        return render_template('home.html')
+@app.route('/')
+@login_required
+def home():
+    return render_template('home.html')
 
-    @app.route('/login', methods=['GET', 'POST'])
-    def login():
-        form = LoginForm()
-        if form.validate_on_submit():
-            return redirect(url_for('home'))
-        return render_template('login.html', form=form)
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        return redirect(url_for('home'))
+    return render_template('login.html', form=form)
 
-    @app.route('/register', methods=['GET', 'POST'])
-    def register():
-        form = RegistrationForm()
-        if form.validate_on_submit():
-            user_datastore.create_user(email=form.email.data, password=form.password.data)
-            db.session.commit()
-            flash('Account created successfully! You can now log in.', 'success')
-            return redirect(url_for('home'))
-        return render_template('register.html', form=form)
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        user_datastore.create_user(email=form.email.data, password=form.password.data)
+        db.session.commit()
+        flash('Account created successfully! You can now log in.', 'success')
+        return redirect(url_for('home'))
+    return render_template('register.html', form=form)
 
 if __name__ == '__main__':
     """se crea un contexto de la aplicacion para que todos los atributos y funciones de flask
